@@ -11,18 +11,32 @@ body {
 p {
     line-height: 1.4em;
 }
+a:link {
+    color: darkorange;
+}
+a:visited {
+    color: darkgoldenrod;
+}
 h1 {
-    color: #666;
+    margin-top: 1.6em;
+    color: darkslateblue;
+    padding-bottom: .4em;
+    border-bottom: 1px dotted #ccc;
 }
 h2 {
     margin-block-end: .4em;
+    color: darkolivegreen;
 }
 h2 + .sectionbody .paragraph:first-child p {
     margin-block-start: 0;
 }
-dt strong, em {
+dt strong, em, #synopsis + .sectionbody, #examples + .sectionbody pre {
     font-family: Menlo, 'Courier New', Courier, monospace;
     font-size: 100%;
+}
+#examples + .sectionbody pre {
+    margin-left: 1.6em;
+    white-space: pre-wrap;
 }
 p em {
     font-size: 95%;
@@ -35,4 +49,23 @@ dd p {
     color: #aaa;
     text-align: center;
     font-style: italic;
+}
+@media (prefers-color-scheme: dark) {
+    html {
+        background: #222;
+        color: white;
+    }
+    h1 {
+        color: lightskyblue;
+        border-bottom-color: #555;
+    }
+    h2 {
+        color: lightsteelblue;
+    }
+    a:link {
+        color: orange;
+    }
+    a:visited {
+        color: lemonchiffon;
+    }
 }
