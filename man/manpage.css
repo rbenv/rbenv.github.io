@@ -1,0 +1,38 @@
+html {
+    font-family: system-ui, sans-serif;
+}
+body {
+    margin: 1em auto;
+    max-width: 50em;
+}
+.sectionbody {
+    margin-left: 1.6em;
+}
+p {
+    line-height: 1.4em;
+}
+h1 {
+    color: #666;
+}
+h2 {
+    margin-block-end: .4em;
+}
+h2 + .sectionbody .paragraph:first-child p {
+    margin-block-start: 0;
+}
+dt strong, em {
+    font-family: Menlo, 'Courier New', Courier, monospace;
+    font-size: 100%;
+}
+p em {
+    font-size: 95%;
+}
+dd p {
+    margin-block-start: .5em;
+}
+#footer {
+    margin: 3em 0;
+    color: #aaa;
+    text-align: center;
+    font-style: italic;
+}

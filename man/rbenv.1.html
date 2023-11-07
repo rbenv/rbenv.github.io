@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="author" content="Mislav Marohnić">
+<title>rbenv(1)</title>
+<link rel="stylesheet" href="./manpage.css">
+</head>
+<body class="manpage">
+<div id="header">
+<h1>rbenv(1) Manual Page</h1>
+<h2 id="name">Name</h2>
+<div class="sectionbody">
+<p>rbenv - manage your application's Ruby environment</p>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="synopsis">Synopsis</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>rbenv</strong> <em>&lt;command&gt;</em> [<em>&lt;args&gt;</em>&#8230;&#8203;]</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="description">Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>rbenv respects the <em>.ruby-version</em> file in a project directory by making sure that any <strong>ruby</strong>, <strong>gem</strong>, <strong>bundle</strong>, or other Ruby command invocation automatically invokes the Ruby version configured for that project.</p>
+</div>
+<div class="paragraph">
+<p>It does so by generating shims for all Ruby executables. As long as rbenv shims directory is prepended to PATH, rbenv automatically ensures transparent switching between Ruby versions.</p>
+</div>
+<div class="paragraph">
+<p>rbenv looks for available Ruby versions in the <em>$RBENV_ROOT/versions</em> directory.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="commands">Commands</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>rbenv global</strong> [<em>&lt;version&gt;</em>]</dt>
+<dd>
+<p>View or change the global Ruby version</p>
+</dd>
+<dt class="hdlist1"><strong>rbenv local</strong> [<em>&lt;version&gt;</em>]</dt>
+<dd>
+<p>View or change the local Ruby version</p>
+</dd>
+<dt class="hdlist1"><strong>rbenv shell</strong> [<em>&lt;version&gt;</em>]</dt>
+<dd>
+<p>View or change the Ruby version for the current shell session</p>
+</dd>
+<dt class="hdlist1"><strong>rbenv version</strong></dt>
+<dd>
+<p>View the currently active Ruby version and where it is set from</p>
+</dd>
+<dt class="hdlist1"><strong>rbenv versions</strong></dt>
+<dd>
+<p>List all locally installed Ruby versions known to rbenv</p>
+</dd>
+<dt class="hdlist1"><strong>rbenv install</strong> [<em>&lt;version&gt;</em>]</dt>
+<dd>
+<p>(Provided by the <strong>ruby-build</strong> plugin) Download and install a new Ruby version</p>
+</dd>
+<dt class="hdlist1"><strong>rbenv rehash</strong></dt>
+<dd>
+<p>Regenerate shims for all known Ruby executables</p>
+</dd>
+<dt class="hdlist1"><strong>rbenv which</strong> [<em>&lt;command&gt;</em>]</dt>
+<dd>
+<p>View the executable path that a command resolves to</p>
+</dd>
+<dt class="hdlist1"><strong>rbenv init</strong></dt>
+<dd>
+<p>Help bootstrap rbenv into the current shell environment</p>
+</dd>
+<dt class="hdlist1"><strong>rbenv help</strong> [<em>&lt;command&gt;</em>]</dt>
+<dd>
+<p>View help text for any rbenv command</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="environment_variables">Environment Variables</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>RBENV_VERSION</strong> (default: read from <em>.ruby-version</em> file)</dt>
+<dd>
+<p>The Ruby version name to be used</p>
+</dd>
+<dt class="hdlist1"><strong>RBENV_ROOT</strong> (default: <em>~/.rbenv</em>)</dt>
+<dd>
+<p>The location where rbenv discovers Ruby versions, plugins, and other configuration</p>
+</dd>
+<dt class="hdlist1"><strong>RBENV_DEBUG</strong></dt>
+<dd>
+<p>Activates printing debug information about rbenv internals to standard error</p>
+</dd>
+<dt class="hdlist1"><strong>RBENV_HOOK_PATH</strong></dt>
+<dd>
+<p>Colon-separated list of paths searched for rbenv plugin scripts</p>
+</dd>
+<dt class="hdlist1"><strong>RBENV_DIR</strong> (default: <em>$PWD</em>)</dt>
+<dd>
+<p>Directory to traverse bottom-up to locate the <em>.ruby-version</em> file</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="plugins">Plugins</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As its core functionality, rbenv only switches between Ruby versions and does nothing else, but offers a plugin mechanism to hook into and override almost any aspect of its default behavior.</p>
+</div>
+<div class="paragraph">
+<p>The most common plugin for rbenv is <strong>ruby-build</strong> which facilitates installing new Ruby versions into the <em>$RBENV_ROOT/versions</em> directory.</p>
+</div>
+<div class="paragraph">
+<p>Read more at <a href="https://github.com/rbenv/rbenv/wiki/Plugins" class="bare">https://github.com/rbenv/rbenv/wiki/Plugins</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="notes">Notes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rbenv/rbenv/discussions" class="bare">https://github.com/rbenv/rbenv/discussions</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rbenv/rbenv/wiki" class="bare">https://github.com/rbenv/rbenv/wiki</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rbenv/ruby-build#readme" class="bare">https://github.com/rbenv/ruby-build#readme</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-06-21 11:17:36 +0200
+</div>
+</div>
+</body>
+</html>

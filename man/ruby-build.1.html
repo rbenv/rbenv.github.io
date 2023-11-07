@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="author" content="Mislav Marohnić">
+<title>ruby-build(1)</title>
+<link rel="stylesheet" href="./manpage.css">
+</head>
+<body class="manpage">
+<div id="header">
+<h1>ruby-build(1) Manual Page</h1>
+<h2 id="name">Name</h2>
+<div class="sectionbody">
+<p>ruby-build - Download, compile, and install a version of Ruby.</p>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="synopsis">Synopsis</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>ruby-build [-kpv] <em>&lt;definition&gt;</em> <em>&lt;prefix&gt;</em> [-- <em>&lt;configure-args&#8230;&#8203;&gt;</em>]<br>
+ruby-build {--list|--definitions}<br>
+ruby-build --version</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="description">Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>ruby-build downloads, compiles, and installs a Ruby version named by the
+<em>definition</em> argument into the location specified by <em>prefix</em>. Optionally,
+extra Ruby configure arguments may be added after "--".</p>
+</div>
+<div class="paragraph">
+<p>The <em>definition</em> argument can be a path to a file on disk, in which case
+it is sourced into ruby-build as a bash script.</p>
+</div>
+<div class="paragraph">
+<p>By default, all compile output is redirected to a log file at:
+"$TMPDIR/ruby-build.*.log". Activate the verbose mode to skip the log file
+and print everything to standard streams.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="environment_variables">Environment Variables</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>TMPDIR</strong></dt>
+<dd>
+<p>The location to write temporary files on disk</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_BUILD_PATH</strong> (default: a timestamped subdirectory of <em>TMPDIR</em>)</dt>
+<dd>
+<p>The build location for downloading source files to and compiling</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_CACHE_PATH</strong> (default: "~/.rbenv/cache" if invoked as rbenv plugin)</dt>
+<dd>
+<p>Where to cache downloaded package files</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_HTTP_CLIENT</strong> (default: first tool found in PATH)</dt>
+<dd>
+<p>One of "aria2c", "curl", or "wget" to use for downloading</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_ARIA2_OPTS</strong></dt>
+<dd>
+<p>Additional options to pass to aria2c for downloading</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_CURL_OPTS</strong></dt>
+<dd>
+<p>Additional options to pass to curl for downloading</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_WGET_OPTS</strong></dt>
+<dd>
+<p>Additional options to pass to wget for downloading</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_MIRROR_URL</strong> (default: a sponsored Amazon CloudFront mirror)</dt>
+<dd>
+<p>Custom mirror URL root to download packages from</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_MIRROR_PACKAGE_URL</strong></dt>
+<dd>
+<p>Custom complete mirror URL</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_SKIP_MIRROR</strong></dt>
+<dd>
+<p>Bypass the download mirror and fetch all package files from their original URLs</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_ROOT</strong> (default: "share/ruby-build" within ruby-build install location)</dt>
+<dd>
+<p>Custom build definition directory</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_TARBALL_OVERRIDE</strong></dt>
+<dd>
+<p>Override the URL to fetch the ruby tarball from, optionally followed by "#&lt;checksum&gt;"</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_BUILD_DEFINITIONS</strong></dt>
+<dd>
+<p>Paths to search for build definitions in addition to <em>RUBY_BUILD_ROOT</em></p>
+</dd>
+<dt class="hdlist1"><strong>CC</strong></dt>
+<dd>
+<p>Path to the C compiler</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_CFLAGS</strong></dt>
+<dd>
+<p>Additional <code>CFLAGS</code> options to use for Ruby compilation</p>
+</dd>
+<dt class="hdlist1"><strong>CONFIGURE_OPTS</strong></dt>
+<dd>
+<p>Additional "./configure" arguments</p>
+</dd>
+<dt class="hdlist1"><strong>MAKE</strong> (default: "make")</dt>
+<dd>
+<p>Custom make command (e.g., "gmake")</p>
+</dd>
+<dt class="hdlist1"><strong>MAKE_OPTS</strong>, <strong>MAKEOPTS</strong></dt>
+<dd>
+<p>Additional arguments for "make"</p>
+</dd>
+<dt class="hdlist1"><strong>MAKE_INSTALL_OPTS</strong></dt>
+<dd>
+<p>Additional arguments for "make install"</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_CONFIGURE_OPTS</strong></dt>
+<dd>
+<p>Additional "./configure" arguments that apply only to Ruby source</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_MAKE_OPTS</strong></dt>
+<dd>
+<p>Additional make arguments that apply only to Ruby source</p>
+</dd>
+<dt class="hdlist1"><strong>RUBY_MAKE_INSTALL_OPTS</strong></dt>
+<dd>
+<p>Additional "make install" arguments that apply only to Ruby source</p>
+</dd>
+<dt class="hdlist1"><strong>NO_COLOR</strong> (default: allow colors when connected to terminal)</dt>
+<dd>
+<p>Disable ANSI colors in output</p>
+</dd>
+<dt class="hdlist1"><strong>CLICOLOR_FORCE</strong></dt>
+<dd>
+<p>Use ANSI colors in output even when not connected to a terminal</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="notes">Notes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rbenv/ruby-build#readme" class="bare">https://github.com/rbenv/ruby-build#readme</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rbenv/ruby-build/wiki" class="bare">https://github.com/rbenv/ruby-build/wiki</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rbenv/ruby-build/discussions" class="bare">https://github.com/rbenv/ruby-build/discussions</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-11-07 19:14:28 +0100
+</div>
+</div>
+</body>
+</html>
