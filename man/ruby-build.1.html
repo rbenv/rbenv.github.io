@@ -22,7 +22,7 @@
 <h2 id="synopsis">Synopsis</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>ruby-build [-kpv] <em>&lt;definition&gt;</em> <em>&lt;prefix&gt;</em> [-- <em>&lt;configure-args&gt;</em>&#8230;&#8203;]<br>
+<p>ruby-build [-dvpk] <em>&lt;definition&gt;</em> <em>&lt;prefix&gt;</em> [-- <em>&lt;configure-args&gt;</em>&#8230;&#8203;]<br>
 ruby-build {--list|--definitions}<br>
 ruby-build --version</p>
 </div>
@@ -34,6 +34,10 @@ ruby-build --version</p>
 <div class="paragraph">
 <p>ruby-build downloads, compiles, and installs a Ruby version named by the
 <em>definition</em> argument into the location specified by <em>prefix</em>.</p>
+</div>
+<div class="paragraph">
+<p>The <em>definition</em> argument can optionally start with "ruby-", in which case
+it resolves to a CRuby that matches the version number that follows.</p>
 </div>
 <div class="paragraph">
 <p>The <em>definition</em> argument can be a path to a file on disk, in which case
@@ -67,6 +71,10 @@ and print everything to standard streams.</p>
 <dd>
 <p>Show version of ruby-build</p>
 </dd>
+<dt class="hdlist1"><strong>-d, --dir</strong></dt>
+<dd>
+<p>Install the Ruby in the <em>prefix/definition</em> destination instead of directly in <em>prefix</em></p>
+</dd>
 <dt class="hdlist1"><strong>-v, --verbose</strong></dt>
 <dd>
 <p>Verbose mode: forward all build output to stdout/stderr</p>
@@ -95,20 +103,35 @@ and print everything to standard streams.</p>
 <h2 id="examples">Examples</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Install Ruby version 3.2.2 under <code>/opt/rubies</code> while tweaking some
-configuration options:</p>
+<p>Install a Ruby version while tweaking some configuration options:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ ruby-build 3.2.2 /opt/rubies/ruby-3.2.2 -- --disable-install-doc --with-openssl-dir=/opt/openssl</pre>
+<pre>$ ruby-build 3.2.2 /path/to/destination -- --disable-install-doc --with-openssl-dir=/opt/openssl</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Usage as rbenv plugin:</p>
+<p>Install a Ruby version to <code>~/.rubies/ruby-3.2.2</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ rbenv install 3.2.2</pre>
+<pre>$ ruby-build --dir ruby-3.2.2 ~/.rubies</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Install a Ruby version to <code>~/.rbenv/versions/3.3.5</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ ruby-build --dir 3.3.5 ~/.rbenv/versions</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Usage as rbenv plugin, accomplishes the same as the previous example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ rbenv install 3.3.5</pre>
 </div>
 </div>
 </div>
@@ -239,7 +262,7 @@ configuration options:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-08 00:17:26 +0100
+Last updated 2024-10-09 19:45:59 +0200
 </div>
 </div>
 </body>
