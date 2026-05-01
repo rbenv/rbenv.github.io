@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="author" content="Mislav Marohnić">
 <title>ruby-build(1)</title>
 <link rel="stylesheet" href="./manpage.css">
@@ -24,6 +24,7 @@
 <div class="paragraph">
 <p>ruby-build [-dvpk] <em>&lt;definition&gt;</em> <em>&lt;prefix&gt;</em> [-- <em>&lt;configure-args&gt;</em>&#8230;&#8203;]<br>
 ruby-build {--list|--definitions}<br>
+ruby-build --resolve <em>&lt;version&gt;</em><br>
 ruby-build --version</p>
 </div>
 </div>
@@ -34,10 +35,6 @@ ruby-build --version</p>
 <div class="paragraph">
 <p>ruby-build downloads, compiles, and installs a Ruby version named by the
 <em>definition</em> argument into the location specified by <em>prefix</em>.</p>
-</div>
-<div class="paragraph">
-<p>The <em>definition</em> argument can optionally start with "ruby-", in which case
-it resolves to a CRuby that matches the version number that follows.</p>
 </div>
 <div class="paragraph">
 <p>The <em>definition</em> argument can be a path to a file on disk, in which case
@@ -55,6 +52,58 @@ and print everything to standard streams.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="ruby_versions">Ruby versions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When listing "latest" Ruby versions, such as in <code>--list</code> output,
+ruby-build only knows of Ruby versions that are bundled with this project.
+That means that when a new Ruby version comes out, ruby-build will not
+know about it immediately; you will have to upgrade ruby-build before you
+can use it to install the new Ruby version.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ruby_implementations">Ruby implementations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>ruby-build ships with definitions for the following Ruby implementations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CRuby, also known as "MRI": denoted by version numbers in form of "X.Y.Z".
+This is the main Ruby implementation that most people use.</p>
+</li>
+<li>
+<p>"jruby": High-performance Ruby implementation with real threading built
+on top of the Java virtual machine (JVM).</p>
+</li>
+<li>
+<p>"mruby": Lightweight Ruby for microcontrollers.</p>
+</li>
+<li>
+<p>"picoruby": Alternative mruby implementation for one-chip microcontrollers.</p>
+</li>
+<li>
+<p>"truffleruby": The Native standalone distribution of TruffleRuby, an
+implementation of Ruby on top of GraalVM&#8217;s Truffle framework.</p>
+</li>
+<li>
+<p>"truffleruby+graalvm": The JVM standalone distribution of TruffleRuby.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <em>definition</em> argument may optionally start with "ruby-", in which case
+it resolves to a CRuby that matches the version number that follows. The
+<em>definition</em> argument may also be a name of one of the alternative Ruby
+implementations, in which case the latest version of that implementation
+will be installed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="options">Options</h2>
 <div class="sectionbody">
 <div class="dlist">
@@ -66,6 +115,10 @@ and print everything to standard streams.</p>
 <dt class="hdlist1"><strong>--definitions</strong></dt>
 <dd>
 <p>List all local definitions, including outdated ones</p>
+</dd>
+<dt class="hdlist1"><strong>--resolve</strong></dt>
+<dd>
+<p>Print the definition name of the latest stable Ruby version matching the <em>version</em> argument</p>
 </dd>
 <dt class="hdlist1"><strong>--version</strong></dt>
 <dd>
@@ -107,23 +160,31 @@ and print everything to standard streams.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ ruby-build 3.2.2 /path/to/destination -- --disable-install-doc --with-openssl-dir=/opt/openssl</pre>
+<pre>$ ruby-build 3.4.9 /path/to/destination -- --disable-install-doc --with-openssl-dir=/opt/openssl</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Install a Ruby version to <code>~/.rubies/ruby-3.2.2</code>:</p>
+<p>Install a Ruby version to <code>~/.rubies/ruby-3.4.9</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ ruby-build --dir ruby-3.2.2 ~/.rubies</pre>
+<pre>$ ruby-build --dir ruby-3.4.9 ~/.rubies</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Install a Ruby version to <code>~/.rbenv/versions/3.3.5</code>:</p>
+<p>Install the latest Ruby 3.x version to <code>~/.rubies/ruby-3.x.y</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ ruby-build --dir 3.3.5 ~/.rbenv/versions</pre>
+<pre>$ ruby-build --dir ruby-3 ~/.rubies</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Install a Ruby version to <code>~/.rbenv/versions/3.3.11</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ ruby-build --dir 3.3.11 ~/.rbenv/versions</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -131,7 +192,7 @@ and print everything to standard streams.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ rbenv install 3.3.5</pre>
+<pre>$ rbenv install 3.3.11</pre>
 </div>
 </div>
 </div>
@@ -262,7 +323,7 @@ and print everything to standard streams.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-09 19:45:59 +0200
+Last updated 2026-05-01 12:26:17 +0200
 </div>
 </div>
 </body>
